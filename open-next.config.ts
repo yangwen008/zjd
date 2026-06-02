@@ -1,25 +1,25 @@
-import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+// open-next.config.ts
+import type { OpenNextConfig } from "@opennextjs/aws/types/open-next.js";
 
-export default defineCloudflareConfig({
-  // 启用 Edge 运行时兼容性
-  compatibilityFlags: ["nodejs_compat"],
-  
-  // 静态资源输出目录（必须与 wrangler.jsonc 一致）
-  outputDir: ".open-next",
-  
-  // 中间件配置（支持你的 middleware.ts）
+const config: OpenNextConfig = {
+  default: {
+    override: {
+      wrapper: "cloudflare-node",
+      converter: "edge",
+    },
+  },
   middleware: {
     external: true,
+    override: {
+      wrapper: "cloudflare-edge",
+      converter: "edge",
+      proxyExternalRequest: "fetch",
+    },
   },
-  
-  // 静态资源处理
+  // 静态资源绑定名（必须与 wrangler.jsonc 一致）
   assets: {
     bindingName: "ASSETS",
   },
-  
-  // 服务器函数配置
-  override: {
-    wrapper: "cloudflare-node",
-    converter: "edge",
-  },
-});
+};
+
+export default config;
