@@ -1,24 +1,26 @@
 // open-next.config.ts
-import type { OpenNextConfig } from "@opennextjs/aws/types/open-next.js";
-
-const config: OpenNextConfig = {
+const config = {
   default: {
     override: {
       wrapper: "cloudflare-node",
       converter: "edge",
+      incrementalCache: "dummy" as const,
+      tagCache: "dummy" as const,
+      queue: "dummy" as const,
     },
   },
+
   middleware: {
     external: true,
     override: {
       wrapper: "cloudflare-edge",
       converter: "edge",
-      proxyExternalRequest: "fetch",
+      proxyExternalRequest: "fetch" as const,
     },
   },
-  // 静态资源绑定名（必须与 wrangler.jsonc 一致）
-  assets: {
-    bindingName: "ASSETS",
+
+  dangerous: {
+    enableCacheInterception: false,
   },
 };
 
