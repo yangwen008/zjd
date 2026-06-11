@@ -1,5 +1,5 @@
 {
-  "name": "rural-rental-sichuan",
+  "name": "rural-rental-core",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -19,7 +19,7 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^0.4.0",
+    "@opennextjs/cloudflare": "^0.4.8",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
